@@ -1,3 +1,5 @@
+import { CardComponent } from "../component/CardComponent";
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
