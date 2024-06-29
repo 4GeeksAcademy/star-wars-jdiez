@@ -3,43 +3,47 @@ import { CardComponent } from "../component/CardComponent";
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			people: [],
+			vehicle:[],
+			planets:[]
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			fetchPeople: async () => {
+				try {
+					const resp = await fetch('https://www.swapi.tech/api/people', {
+						method: "GET"
+					});
+					const data = await resp.json();
+					console.log("Datos recibidos de la API:", data); 
+						setStore({ people: data.results}); 
+				} catch (error) {
+					console.log(error);
+				}
 			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
+			fetchVehicle: async () => {
+				try {
+					const resp = await fetch('https://www.swapi.tech/api/vehicles', {
+						method: "GET"
+					});
+					const data = await resp.json();
+					console.log("Datos recibidos de la API:", data); 
+						setStore({ vehicle: data.results}); 
+				} catch (error) {
+					console.log(error);
+				}
 			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			fetchPlanets: async () => {
+				try {
+					const resp = await fetch('https://www.swapi.tech/api/planets', {
+						method: "GET"
+					});
+					const data = await resp.json();
+					console.log("Datos recibidos de la API:", data); 
+						setStore({ planets: data.results}); 
+				} catch (error) {
+					console.log(error);
+				}
+			},
 		}
 	};
 };
