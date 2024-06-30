@@ -12,3 +12,7 @@ body{
 .nav-link:hover{
     color: rgb(243, 196, 43) !important;
 }
+
+.dropdown-menu{
+    width: 15rem;
+}
