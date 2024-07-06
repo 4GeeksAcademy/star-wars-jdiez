@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useParams } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 
 
@@ -21,7 +22,7 @@ export const InfoPersonaje = () => {
     return (
         <div>
             <h1 className="text-warning text-center display-1">{personaje.name}</h1>
-            <div className="d-flex gap-2 flex-wrap container-fluid bg-light p-5 w-75 rounded">
+            <div className="d-flex gap-2 flex-wrap container-fluid tarjeta-info p-5 w-75 rounded">
                 <div>
                     <img className="rounded" src={
                         personaje.name === "Luke Skywalker" ? 'https://starwars-visualguide.com/assets/img/characters/1.jpg'
@@ -46,6 +47,13 @@ export const InfoPersonaje = () => {
                     <p><strong>Año de nacimiento:</strong> {personaje.birth_year}</p>
                     <p><strong>Género:</strong> {personaje.gender}</p>
                     <p><strong>Descripción:</strong> {store.singleCharacter.result.description}</p>
+                    <div className="d-flex gap-4 align-items-start mt-5">
+                        <Link to="/" className="btn btn-warning fw-bold">Back to Home</Link>
+                        <button onClick={store.favoritos?.includes(personaje.name) ? null : () => actions.addFavourite(personaje.name)} className="btn btn-warning">{store.favoritos?.includes(personaje.name)
+                            ? <i className="fa-solid fa-heart"></i>
+                            : <i className="fa-regular fa-heart"></i>}</button>
+                    </div>
+
                 </div>
             </div>
         </div>

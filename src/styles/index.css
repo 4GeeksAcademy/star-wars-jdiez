@@ -16,3 +16,9 @@ body{
 .dropdown-menu{
     width: 15rem;
 }
+
+.tarjeta-info{
+    background-color: #3b3737;
+    color: #cacaca;
+    border: 1px solid white;
+}

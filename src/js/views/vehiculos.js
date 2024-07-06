@@ -14,7 +14,9 @@ export const Vehiculos = () => {
                     {store.vehicle && (
                         store.vehicle.map((vehiculo, index) => (
                             <div className='swiper-slide-paginas vehicles ps-4 pt-3'>
-                                <CardComponent key={index} title={vehiculo.name} info={''} img={
+                                <CardComponent key={index} title={vehiculo.name} favourite={store.favoritos?.includes(vehiculo.name)? '' : () => actions.addFavourite(vehiculo.name)} corazon={store.favoritos?.includes(vehiculo.name)
+										? <i className="fa-solid fa-heart"></i>
+										: <i className="fa-regular fa-heart"></i>} paginaIndividual={`/info_vehiculo/${vehiculo.uid}/${vehiculo.name}`} info={''} img={
                             vehiculo.name === "Sand Crawler" ? 'https://starwars-visualguide.com/assets/img/vehicles/4.jpg'
                             : vehiculo.name === "X-34 landspeeder" ? 'https://starwars-visualguide.com/assets/img/vehicles/7.jpg'
                             : vehiculo.name === "T-16 skyhopper" ? 'https://starwars-visualguide.com/assets/img/vehicles/6.jpg'

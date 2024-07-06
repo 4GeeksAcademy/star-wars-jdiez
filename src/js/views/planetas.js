@@ -13,7 +13,9 @@ export const Planetas = () => {
                 {store.planets && (
                     store.planets.map((planeta, index) => (
                         <div className='swiper-slide-paginas planets ps-4 pt-3 fade-in'>
-                            <CardComponent key={index} title={planeta.name} info={''} img={
+                            <CardComponent key={index} title={planeta.name} favourite={store.favoritos?.includes(planeta.name)? '' : () => actions.addFavourite(planeta.name)} corazon={store.favoritos?.includes(planeta.name)
+										? <i className="fa-solid fa-heart"></i>
+										: <i className="fa-regular fa-heart"></i>} info={''} paginaIndividual={`/info_planeta/${planeta.uid}/${planeta.name}`} img={
                                 planeta.name === 'Tatooine' ? 'https://static.wikia.nocookie.net/esstarwars/images/b/b0/Tatooine_TPM.png/revision/latest?cb=20131214162357'
                                     : planeta.name === 'Alderaan' ? 'https://starwars-visualguide.com/assets/img/planets/2.jpg'
                                         : planeta.name === 'Yavin IV' ? 'https://starwars-visualguide.com/assets/img/planets/3.jpg'

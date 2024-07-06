@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import '../../styles/index.css'
 import { Context } from "../store/appContext";
 
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
+
 
 	return (
 		<>
@@ -41,25 +42,26 @@ export const Navbar = () => {
 								<ul className="dropdown-menu p-3">
 									{store.favoritos && store.favoritos.length > 0 ? (
 										store.favoritos.map((fav, index) => (
-											<div className="d-flex align-items-center justify-content-between">
-												<li className="pb-1" key={index}>{fav}
+											<div key={index} className="d-flex align-items-center justify-content-between">
+												<li className="pb-1">
+													{fav}
 												</li>
 												<button onClick={() => actions.deleteFavourite(index)} className="btn"><i class="fa-solid fa-trash"></i></button>
 											</div>
-										))): 'Sin favoritos'}
-						</ul>
+										))) : 'Sin favoritos'}
+								</ul>
+							</div>
+						</div>
+						<form className="d-flex" role="search">
+							<input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" />
+							<button className="btn btn-outline-warning" type="submit">Buscar</button>
+						</form>
 					</div>
-				</div>
-				<form className="d-flex" role="search">
-					<input className="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" />
-					<button className="btn btn-outline-warning" type="submit">Buscar</button>
-				</form>
-			</div>
-		</div >
+				</div >
 			</nav >
-	<div className="d-flex justify-content-center">
-		<img className="mb-5" src="https://seeklogo.com/images/S/star-wars-logo-886FACEAFF-seeklogo.com.png" />
-	</div>
+			<div className="d-flex justify-content-center">
+				<img className="mb-5" src="https://seeklogo.com/images/S/star-wars-logo-886FACEAFF-seeklogo.com.png" />
+			</div>
 		</>
 	);
 };

@@ -13,7 +13,10 @@ export const Personajes = () => {
                 {store.people && (
                     store.people.map((personaje, index) => (
                         <div className='ps-4 pt-3 personajes fade-in'>
-                            <CardComponent key={index} title={personaje.name} info={''} img={
+                            <CardComponent key={index} title={personaje.name} paginaIndividual={`/info_personaje/${personaje.uid}/${personaje.name}`} favourite={store.favoritos?.some(fav => fav.id === personaje.uid) ? null : () => actions.addFavourite(personaje.name, personaje.uid, personaje.description)} 
+									corazon={store.favoritos?.some(fav => fav.id === personaje.uid)
+										? <i className="fa-solid fa-heart"></i>
+										: <i className="fa-regular fa-heart"></i>} info={''} img={
                                 personaje.name === "Luke Skywalker" ? 'https://starwars-visualguide.com/assets/img/characters/1.jpg'
                                     : personaje.name === "C-3PO" ? 'https://starwars-visualguide.com/assets/img/characters/2.jpg'
                                         : personaje.name === "R2-D2" ? 'https://starwars-visualguide.com/assets/img/characters/3.jpg'

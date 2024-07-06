@@ -1,4 +1,3 @@
-import { CardComponent } from "../component/CardComponent";
 
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
@@ -9,17 +8,22 @@ const getState = ({ getStore, getActions, setStore }) => {
 			singleVehicle:[],
 			planets:[],
 			singlePlanet:[],
-			favoritos:[]
+			favoritos: JSON.parse(localStorage.getItem("favoritos")) || []
 		},
 		actions: {
 			addFavourite: (favorito) => {
 				const store = getStore();
-				setStore({ favoritos: [...store.favoritos, favorito] });
+				const nuevosFavoritos = [...store.favoritos, favorito];
+				setStore({ favoritos: nuevosFavoritos });
+				localStorage.setItem("favoritos", JSON.stringify(nuevosFavoritos));
 			},
 			deleteFavourite: (indexDelete) => {
 				const store = getStore();
-				setStore({ favoritos: store.favoritos.filter((_, index) => index !== indexDelete)})
+				const nuevosFavoritos = store.favoritos.filter((_, index) => index !== indexDelete);
+                setStore({ favoritos: nuevosFavoritos });
+                localStorage.setItem("favoritos", JSON.stringify(nuevosFavoritos));
 			},
+
 			fetchPeople: async () => {
 				try {
 					const resp = await fetch('https://www.swapi.tech/api/people', {
